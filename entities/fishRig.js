@@ -9,6 +9,7 @@ const pupilMat = new THREE.MeshLambertMaterial({ color: 0x000000 });
 
 const vitiligoBodyMat = new THREE.MeshLambertMaterial({ color: 0x555555 });
 const vitiligoPatchMat = new THREE.MeshLambertMaterial({ color: 0xf0f0f0 });
+const goldenBodyMat = new THREE.MeshLambertMaterial({ color: 0xdaa520 });
 
 function createVoxel(x, y, z, w, h, d, mat) {
   const geo = new THREE.BoxGeometry(w, h, d);
@@ -24,7 +25,8 @@ export function createRiggedFish({ scene, score = 0, type = 'classic', opts = {}
   group.rotation.y = Math.PI;
 
   const isVitiligo = type === 'vitiligo';
-  const bodyMat = isVitiligo ? vitiligoBodyMat : fishMat;
+  const isGolden = type === 'golden';
+  const bodyMat = isVitiligo ? vitiligoBodyMat : (isGolden ? goldenBodyMat : fishMat);
 
   // Skeleton chain (bones as Object3D pivots)
   const boneCount = 9;
@@ -98,7 +100,7 @@ export function createRiggedFish({ scene, score = 0, type = 'classic', opts = {}
   const weight = rareTiny ? THREE.MathUtils.randFloat(0.06, 0.14) : THREE.MathUtils.randFloat(0.18, 1.6);
   const sizeScale = THREE.MathUtils.clamp(Math.cbrt(weight) * 0.85, 0.30, 1.20);
   const sizeSpeedFactor = 1 + (1.1 - sizeScale) * 0.55;
-  const typeSpeed = isVitiligo ? 1.18 : 1.0;
+  const typeSpeed = isVitiligo ? 1.18 : (isGolden ? 1.05 : 1.0);
   const sprinter = Math.random() < 0.20;
   const sprintMult = sprinter ? 1.25 : 1.0;
   const swimSpeed = (0.028 + Math.random() * 0.022) * speedMultiplier * sizeSpeedFactor * typeSpeed * sprintMult;

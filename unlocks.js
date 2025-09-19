@@ -10,6 +10,12 @@ export const BEARS = [
         name: 'Grizzly', 
         asset: 'grizzly_bear_unlock.png',
         unlockCondition: { type: 'score', value: 1000 }
+    },
+    { 
+        id: 'polar', 
+        name: 'Polar Bear', 
+        asset: 'polar_bear_unlock.png',
+        unlockCondition: { type: 'score', value: 1500 }
     }
 ];
 
@@ -25,8 +31,15 @@ export const FISH = [
         id: 'vitiligo', 
         name: 'Vitiligo Fish', 
         asset: 'vitiligo_fish_unlock.png',
-        unlockCondition: { type: 'score', value: 500 }, 
+        unlockCondition: { type: 'score', value: 250 }, 
         difficulty: 2,
+    },
+    { 
+        id: 'golden',
+        name: 'Golden Fish',
+        asset: 'golden_fish_unlock.png',
+        unlockCondition: { type: 'score', value: 750 },
+        difficulty: 3,
     },
 ];
 

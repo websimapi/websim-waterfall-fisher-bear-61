@@ -1,3 +1,5 @@
+
+```javascript
 import { createFish } from '../entities/fish.js';
 import { FISH } from '../unlocks.js';
 
@@ -27,8 +29,10 @@ function nextPattern() {
 function getFishToSpawn(score, activeFishes, playerProgress) {
     const classic = FISH.find(f => f.id === 'classic') || FISH[0];
     const vit = FISH.find(f => f.id === 'vitiligo');
+    const golden = FISH.find(f => f.id === 'golden');
     const hasActiveVit = activeFishes.some(f => f?.userData?.fishType === 'vitiligo');
-    if (score >= 500 && vit && !hasActiveVit && Math.random() < 0.33) return vit;
+    if (score >= 250 && vit && !hasActiveVit && Math.random() < 0.33) return vit;
+    if (score >= 800 && golden && Math.random() < 0.20) return golden;
     return classic;
 }
 

@@ -6,6 +6,8 @@ const darkBrownMat = new THREE.MeshLambertMaterial({ color: 0x4a2d1e });
 // Grizzly materials
 const grizzlyMat = new THREE.MeshLambertMaterial({ color: 0x6e4a2e });
 const darkGrizzlyMat = new THREE.MeshLambertMaterial({ color: 0x3b2818 });
+const polarMat = new THREE.MeshLambertMaterial({ color: 0xeeeeee });
+const darkPolarMat = new THREE.MeshLambertMaterial({ color: 0xb0b0b0 });
 
 export const BEAR_X_LIMIT = 3.5;
 const BEAR_MOVE_SPEED = 0.08;
@@ -22,8 +24,8 @@ export function createBear(type = 'splashy') {
     const group = new THREE.Group();
     group.name = 'bear'; // Assign name to the group for easier identification
 
-    const bodyMat = type === 'grizzly' ? grizzlyMat : brownMat;
-    const accentMat = type === 'grizzly' ? darkGrizzlyMat : darkBrownMat;
+    const bodyMat = type === 'polar' ? polarMat : (type === 'grizzly' ? grizzlyMat : brownMat);
+    const accentMat = type === 'polar' ? darkPolarMat : (type === 'grizzly' ? darkGrizzlyMat : darkBrownMat);
 
     group.add(createVoxel(0, 0, 0, 1.5, 1.5, 1, bodyMat));
     group.add(createVoxel(0, 1.25, 0, 1, 1, 1, bodyMat));
