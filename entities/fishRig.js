@@ -99,7 +99,9 @@ export function createRiggedFish({ scene, score = 0, type = 'classic', opts = {}
   const sizeScale = THREE.MathUtils.clamp(Math.cbrt(weight) * 0.85, 0.30, 1.20);
   const sizeSpeedFactor = 1 + (1.1 - sizeScale) * 0.55;
   const typeSpeed = isVitiligo ? 1.18 : 1.0;
-  const swimSpeed = (0.028 + Math.random() * 0.022) * speedMultiplier * sizeSpeedFactor * typeSpeed;
+  const sprinter = Math.random() < 0.20;
+  const sprintMult = sprinter ? 1.25 : 1.0;
+  const swimSpeed = (0.028 + Math.random() * 0.022) * speedMultiplier * sizeSpeedFactor * typeSpeed * sprintMult;
   group.scale.set(sizeScale, sizeScale, sizeScale);
 
   group.userData = {
@@ -120,7 +122,8 @@ export function createRiggedFish({ scene, score = 0, type = 'classic', opts = {}
     drift: 0,
     sizeScale,
     rareTiny,
-    weight
+    weight,
+    sprinter
   };
 
   group.traverse(o => { if (o.isMesh || o.isGroup) o.frustumCulled = false; });
