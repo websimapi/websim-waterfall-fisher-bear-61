@@ -1,6 +1,8 @@
 import * as THREE from 'three';
+import { setScoreLive, gameState } from './game.js';
 
 let sceneRef = null;
+let devUIBound = false;
 
 function createAxisLabel(text, position, color = 'black', size = 64) {
     const canvas = document.createElement('canvas');
@@ -72,12 +74,24 @@ export function toggleDevTools(controls) {
     setCatchRegionVisible(controls.enabled);
     const devConsoleButton = document.getElementById('dev-console-button');
     if (!devConsoleButton) return;
-
+    const panel = document.getElementById('dev-score-panel');
     if (controls.enabled) {
         devConsoleButton.style.backgroundColor = 'rgba(255, 0, 0, 0.7)';
         devConsoleButton.style.borderColor = '#ff8080';
+        if (panel) {
+            panel.classList.remove('hidden');
+            if (!devUIBound) {
+                const input = document.getElementById('dev-score-input');
+                const apply = document.getElementById('dev-score-apply');
+                if (input) input.value = String(gameState.score || 0);
+                apply?.addEventListener('click', () => setScoreLive(parseInt(input.value,10)||0));
+                input?.addEventListener('keydown', (e)=>{ if(e.key==='Enter'){ setScoreLive(parseInt(input.value,10)||0); }});
+                devUIBound = true;
+            }
+        }
     } else {
         devConsoleButton.classList.add('hidden');
+        panel?.classList.add('hidden');
     }
 }
 
@@ -96,4 +110,6 @@ export function resetDevTools(controls) {
         devHelperGroup.visible = false;
     }
     setCatchRegionVisible(false);
+    const panel = document.getElementById('dev-score-panel');
+    panel?.classList.add('hidden');
 }

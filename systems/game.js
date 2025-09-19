@@ -372,3 +372,8 @@ function grabAndThrow(fish) {
     const recover = new TWEEN.Tween(bear.rotation).to({ x: 0 }, 220).easing(easeOut);
     bend1.start(); prep.start(); bend1.chain(recover); prep.chain(throwTw);
 }
+
+export function setScoreLive(newScore) {
+    gameState.score = Math.max(0, Math.floor(newScore)||0);
+    updateUIValues({ score: gameState.score, streak: gameState.streak });
+}

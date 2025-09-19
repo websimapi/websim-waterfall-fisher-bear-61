@@ -35,6 +35,12 @@
             <p>Final Score: <span id="final-score">0</span></p>
             <button id="submit-score-btn">Submit Score</button>
         </div>
+        <!-- Dev score editor (shown only when Dev mode is enabled) -->
+        <div id="dev-score-panel" class="hidden">
+            <label for="dev-score-input">Score</label>
+            <input id="dev-score-input" type="number" min="0" step="1" />
+            <button id="dev-score-apply">Apply</button>
+        </div>
         <div id="start-screen">
             <img id="game-logo" src="splashy_bear_logo.png" alt="Splashy Bear Logo">
             <div id="start-screen-content">
